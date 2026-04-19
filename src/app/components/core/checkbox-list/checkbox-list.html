@@ -1,0 +1,78 @@
+<section class="check-section">
+  <div [formGroup]="toggleCbxForm">
+    <span class="example-list-section">
+      <ul>
+        @for (item of items(); track item.id; let i = $index) {
+        <li>
+          <div class="row flex">
+            <div class="col">
+              <mat-checkbox class="checkbox-item first-col" [checked]="item.checked == true"
+                (change)="update($event.checked, i)">
+                <span>{{ item.amount }} </span>
+                <span>{{ item.unit }} </span>
+                <span>{{ item.name }} </span>
+              </mat-checkbox>
+            </div>
+            <div class="col second-col">
+              <app-delete-button (deleteAction)="deleteItem(i)"></app-delete-button>
+            </div>
+          </div>
+        </li>
+        }
+      </ul>
+      <div class="row">
+        <div class="col first-col">
+        </div>
+        <div class="col second-col save">
+          @if(items() && items().length > 0) {
+          <app-save-button (saveAction)="toggleChecked()"></app-save-button>
+          }
+        </div>
+      </div>
+    </span>
+
+  </div>
+</section>
+<hr>
+<section class="save-section">
+  <div class="controls-container">
+    <div [formGroup]="newEntriesForm">
+      <ng-container formArrayName="newEntries">
+        @for (newEntryForm of newEntries.controls; track newEntryForm; let i = $index) {
+        <ng-container [formGroupName]="i">
+          <div>
+            <div class="row flex">
+              <div class="col first-col">
+                <mat-form-field>
+                  <input matInput formControlName="amount" placeholder="Anzahl">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput formControlName="unit" placeholder="Einheit">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <input matInput formControlName="name" placeholder="Bezeichnung">
+                </mat-form-field>
+              </div>
+              <div class="col second-col">
+                <app-delete-button (deleteAction)="deleteNewEntry(i)"></app-delete-button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        }
+      </ng-container>
+    </div>
+  </div>
+  <div class="row flex">
+    <div class="col first-col">
+      <div class="add-button-container">
+        <app-plus-button [showText]="false" (openCreateAction)="add()"></app-plus-button>
+      </div>
+    </div>
+    <div class="col second-col">
+      @if(newEntries.controls.length > 0) {
+      <app-save-button (saveAction)="save()"></app-save-button>
+      }
+    </div>
+  </div>
+</section>

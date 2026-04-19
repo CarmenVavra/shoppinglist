@@ -1,0 +1,10 @@
+<div class="mat-dialog-container">
+  <h3 mat-dialog-title>Eintrag löschen</h3>
+  <mat-dialog-content>
+    <p>Möchtest du den Eintrag wirklich löschen?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="dialogRef.close(false)">Abbrechen</button>
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="dialogRef.close(true)">Ok</button>
+  </mat-dialog-actions>
+</div>

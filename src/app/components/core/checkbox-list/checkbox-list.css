@@ -1,0 +1,66 @@
+.check-section,
+.save-section {
+  margin: 12px 0;
+}
+
+.save-section {
+  margin-top: 12px;
+  width: 90vw;
+  max-width: 550px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* .second-col {
+  padding-right: 0.9rem;
+  justify-self: flex-end;
+} */
+
+.example-margin {
+  margin: 0 12px;
+}
+
+.row {
+  width: 100%;
+  max-width: 550px;
+}
+
+.col {
+  width: 100%;
+}
+
+.col.second-col {
+  text-align: end;
+}
+
+/* .col.second-col.save {
+  width: 535px;
+  text-align: end;
+} */
+
+.row.flex {
+  display: flex;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+  width: 90vw;
+  max-width: 550px;
+  margin-block-start: 0px !important;
+  padding-inline-start: 0px !important;
+}
+
+li {
+  background-color: #b0b8b4 !important;
+  margin: 4px;
+  padding: 10px;
+}
+
+::ng-deep label.mdc-label {
+  color: rgb(35, 57, 73) !important;
+  font-weight: bold;
+  font-size: 1.2em;
+}

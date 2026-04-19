@@ -1,0 +1,12 @@
+.snackbar-content {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #b0b8b4;
+  color: #272932;
+}
+
+.snackbar-content i {
+  margin-right: 10px;
+  color: darkgoldenrod !important;
+}

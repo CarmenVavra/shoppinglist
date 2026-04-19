@@ -1,0 +1,11 @@
+.list-container {
+  padding: 20px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-style: italic;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #b0b8b4;
+}
