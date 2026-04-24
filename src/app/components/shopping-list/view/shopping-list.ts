@@ -32,6 +32,9 @@ export class ShoppingList {
   #activatedRoute = inject(ActivatedRoute);
   #myAuthService = inject(MyAuthService);
 
+  /**
+   * Initializes the component by loading the shopping list for the user ID obtained from the route parameters. 
+   */
   ngOnInit(): void {
     this.userId.set(Number(this.#activatedRoute.snapshot.paramMap.get('userId')));
     if (this.userId() > 0) {
@@ -39,14 +42,21 @@ export class ShoppingList {
     }
   }
 
+  /**
+   * Loads the shopping list for a given user ID.
+   * @param userId - The ID of the user whose shopping list is to be loaded.
+   */
   private loadShoppingList(userId: number) {
     this.#shoppingListService.getAllByUserId(userId).pipe(takeUntil(this.unsubscribe$)).subscribe((shoppingList) => {
       this.shoppingList.set(shoppingList);
     });
   }
 
+  /**
+   * Saves a new entry to the shopping list.
+   * @param entryFormArray - The form array containing the new entry data.
+   */
   protected saveEntry(entryFormArray: FormArray) {
-    // Create each item individually
     entryFormArray.value.forEach((item: ListItem) => {
       item.userId = this.userId();
       this.#shoppingListService.create(item).subscribe((entry) => {
@@ -56,6 +66,10 @@ export class ShoppingList {
     });
   }
 
+  /**
+   * Prompts the user for confirmation before deleting a shopping list item.
+   * @param item - The item to be deleted.
+   */
   protected deleteItem(item: CheckboxItem) {
     this.#coreService.openConfirmationDialog().subscribe((confirmationResult) => {
       if (true == confirmationResult) {
@@ -64,6 +78,10 @@ export class ShoppingList {
     });
   }
 
+  /**
+   * Deletes a shopping list item.
+   * @param item - The item to be deleted.
+   */
   private delete(item: CheckboxItem) {
     this.#shoppingListService.delete(item.id!).pipe(takeUntil(this.unsubscribe$)).subscribe((response) => {
       this.loadShoppingList(item.userId!);
@@ -77,12 +95,21 @@ export class ShoppingList {
     });
   }
 
+  /**
+   * Checks a shopping list item.
+   * @param item - The item to be checked.
+   */
   private checkItem(item: CheckboxItem) {
     this.#shoppingListService.check(item).subscribe((item) => {
       this.loadShoppingList(item.userId!);
     });
   }
 
+  /**
+   * Logs the user out of the application.
+   * If the AuthService is not available, the method returns early.
+   * It removes the user from local storage and redirects to the application's origin after logout.
+   */
   logout(): void {
     if (!this.auth) return;
     this.#myAuthService.removeUserFromLocalStorage();

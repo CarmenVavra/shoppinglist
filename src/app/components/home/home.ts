@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 import { User as MyUser } from '../user/models/user.model';
 import { AuthService as MyAuthService } from '../auth/services/auth-service.service';
 import { UserService } from '../user/services/user.service';
-import { MatAnchor, MatButton } from "@angular/material/button";
 import { AuthOService } from '../auth/services/auth-o.service';
+import { MatAnchor, MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-home',
@@ -30,8 +30,14 @@ export class Home {
   #userService = inject(UserService);
   #authOService = inject(AuthOService);
 
+  /**
+   * Initializes the component by checking the authentication status and loading the user profile.
+   * If the user is authenticated, it attempts to fetch the user from the database using their email.
+   * If the user does not exist in the database, it saves the user from Auth0 to the database.
+   * Finally, it stores the active user in local storage and navigates to the shopping list page for that user.
+   */
   ngOnInit(): void {
-
+    // TODO: Refactor this method to use async/await for better readability and error handling
     // When authenticated, switch to user$ to get the user profile
     this.auth?.isAuthenticated$.pipe(
       switchMap(isAuth => {
@@ -64,7 +70,7 @@ export class Home {
           );
         }
         return [];
-      }),
+      })
     ).subscribe((user) => {
       this.activeUser.set(user as MyUser);
       this.#myAuthService.storeUserToLocalStorage(user as MyUser);
@@ -72,6 +78,10 @@ export class Home {
     });
   }
 
+  /**
+   * Logs the user out of the application.
+   * It removes the user from local storage and redirects to the application's origin after logout.
+   */
   logout(): void {
     if (!this.auth) return;
     const returnTo = this.window?.location.origin ?? 'http://localhost:4200';

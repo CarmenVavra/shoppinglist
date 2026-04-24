@@ -62,6 +62,9 @@ export class CheckboxList {
     this.toggleCheckedAction.emit(this.items());
   }
 
+  /**
+   * Adds a new entry to the list.
+   */
   protected add() {
     const newEntryForm = this.#fb.group({
       name: new FormControl('', Validators.required),

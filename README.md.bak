@@ -2,8 +2,8 @@ Shoppinglist-App
 
 #VERSIONS: 
 Angular 	21.2.7
-CLI	 		21.2.7
-Material 	21.2.6
+	- CLI 	21.2.7
+	- Material 	21.2.6
 Node.js 	22.22.1
 Npm			11.6.2 
 Java		jdk-26

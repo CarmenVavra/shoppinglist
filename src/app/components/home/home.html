@@ -1,21 +1,7 @@
 @if (auth) {
-@if (auth.isLoading$ | async) {
-<div>Loading...</div>
-} @else {
-@if ((auth.isAuthenticated$ | async) && (auth.user$ | async); as user) {
-<p>Logged in as {{ user.email }}</p>
-<h1>User Profile</h1>
-<pre>{{ user | json }}</pre>
-<button mat-raised-button type="button" (click)="logout()">Logout</button>
-} @else {
-@if (auth.error$ | async; as error) {
-<p>Error: {{ error.message }}</p>
-}
 <button mat-raised-button type="button"
   (click)="auth.loginWithPopup({ authorizationParams: { screen_hint: 'signup' } })">
   Registrieren
 </button>
 <button mat-raised-button type="button" (click)="auth.loginWithPopup()">Anmelden</button>
-}
-}
 }
