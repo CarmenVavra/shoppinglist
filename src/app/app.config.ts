@@ -23,8 +23,8 @@ export const appConfigWithAuth0: ApplicationConfig = {
   providers: [
     ...appConfig.providers,
     provideAuth0({
-      domain: "dev-q5zasy7cz1epxhwx.us.auth0.com",
-      clientId: "AZMzcaADckNv5Wlr52OZB7bCmMK82JLr",
+      domain: "domain-Auth0",
+      clientId: "clientId-Auth0",
       authorizationParams: {
         redirect_uri: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:4200',
       },
